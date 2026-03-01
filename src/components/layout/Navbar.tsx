@@ -18,16 +18,16 @@ export const Navbar = () => {
     }, []);
 
     const navLinks = [
-        { name: 'Core', href: '/core' },
         { name: 'About', href: '/about' },
-        { name: 'Contact', href: '/contact' },
+        { name: 'Portfolio', href: '/portfolio' },
+        { name: 'Team', href: '/team' },
     ];
 
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4">
+        <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-6 px-4">
             <div
                 style={{
-                    maxWidth: scrolled ? '40rem' : '45rem',
+                    maxWidth: scrolled ? '50rem' : '90rem',
                     transition: 'max-width 0.5s ease-in-out, background-color 0.5s ease-in-out',
                 }}
                 className={`w-full rounded-full px-6 py-1.5 ${
@@ -75,7 +75,7 @@ export const Navbar = () => {
                             href="/contact"
                             className="group inline-flex items-center gap-2 text-sm font-semibold text-white"
                         >
-                            TALK TO US
+                            CONTACT US
                             <span className="flex items-center justify-center w-8 h-8 rounded-full border border-white/40 text-white transition-colors duration-300 group-hover:bg-brand-lime group-hover:border-brand-lime group-hover:text-black">
                                 <ArrowUpRight className="w-4 h-4" />
                             </span>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Libre_Caslon_Text } from "next/font/google";
 import "./globals.css";
 
 import { Navbar } from "@/components/layout/Navbar";
@@ -15,6 +15,13 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const libreCaslonText = Libre_Caslon_Text({
+  variable: "--font-libre-caslon",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+});
+
 export const metadata: Metadata = {
   title: "Andalus | Investing in the Future of Healthcare",
   description: "A healthcare investment fund focused on transforming care delivery and improving patient outcomes.",
@@ -27,16 +34,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+      <head />
       <body
-        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
+        className={`${geistSans.variable} ${geistMono.variable} ${libreCaslonText.variable} font-sans antialiased bg-background text-foreground`}
       >
         <GridBackground />
         <Navbar />

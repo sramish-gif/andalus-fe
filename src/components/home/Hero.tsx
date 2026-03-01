@@ -14,17 +14,30 @@ export const Hero = () => {
             const el = videoContainerRef.current;
             if (!el) return;
 
-            const progress = Math.min(1, window.scrollY / window.innerHeight);
+            const scrollY = window.scrollY;
+            const vh = window.innerHeight;
 
-            const height = PEEK_VH + (100 - PEEK_VH) * progress;
-            const inset = 3 * (1 - progress);
-            const radius = 12 * (1 - progress);
+            // Phase 1: expand video from peek to full screen (scroll 0 → vh)
+            const expandProgress = Math.min(1, Math.max(0, scrollY / vh));
+
+            // Phase 2: contract video back (add insets) before next section overlaps
+            // Kicks in during the latter portion of the scroll expansion space
+            const contractStart = vh * 1.25;
+            const contractEnd = vh * 1.85;
+            const contractProgress = Math.min(1, Math.max(0, (scrollY - contractStart) / (contractEnd - contractStart)));
+
+            const height = PEEK_VH + (100 - PEEK_VH) * expandProgress;
+            const inset = 3 * (1 - expandProgress + contractProgress);
+            const topRadius = 12 * (1 - expandProgress + contractProgress);
+            const bottomRadius = 12 * contractProgress;
 
             el.style.height = `${height}vh`;
             el.style.left = `${inset}%`;
             el.style.right = `${inset}%`;
-            el.style.borderTopLeftRadius = `${radius}px`;
-            el.style.borderTopRightRadius = `${radius}px`;
+            el.style.borderTopLeftRadius = `${topRadius}px`;
+            el.style.borderTopRightRadius = `${topRadius}px`;
+            el.style.borderBottomLeftRadius = `${bottomRadius}px`;
+            el.style.borderBottomRightRadius = `${bottomRadius}px`;
         };
 
         window.addEventListener('scroll', update, { passive: true });
@@ -43,11 +56,11 @@ export const Hero = () => {
                     left: '3%',
                     right: '3%',
                     height: `${PEEK_VH}vh`,
-                    borderTopLeftRadius: '12px',
-                    borderTopRightRadius: '12px',
+                    borderTopLeftRadius: '10px',
+                    borderTopRightRadius: '10px',
                     overflow: 'hidden',
                     zIndex: 10,
-                    willChange: 'height, left, right',
+                    willChange: 'height, left, right, border-radius',
                 }}
             >
                 <video
@@ -94,48 +107,50 @@ export const Hero = () => {
 
                 {/* Text content */}
                 <div
-                    className="container mx-auto px-6"
+                    className="container mx-auto px-6 md:px-12"
                     style={{
                         position: 'relative',
                         zIndex: 22,
                         height: `${100 - PEEK_VH}vh`,
                         display: 'flex',
-                        flexDirection: 'column',
+                        flexDirection: 'row',
                         alignItems: 'center',
-                        justifyContent: 'center',
-                        textAlign: 'center',
-                        paddingTop: '7rem',
+                        justifyContent: 'space-between',
+                        paddingTop: '4rem',
+                        gap: '3rem',
                     }}
                 >
-                    {/* Small label */}
-                    <div className="flex items-center gap-3 mb-8 text-[11px] font-medium uppercase tracking-[0.2em] text-brand-gray">
-                        <span>→</span>
-                        <span>Healthcare Investment</span>
-                        <span>·</span>
-                        <span>Transforming Care Delivery</span>
-                        <span>←</span>
+                    {/* Left column: label + heading */}
+                    <div style={{ flex: '1 1 0', minWidth: 0 }}>
+                        {/* Small label */}
+                        <div className="mb-5 text-[10px] font-medium uppercase tracking-[0.25em] text-black/60">
+                            Strategy&nbsp;&nbsp;·&nbsp;&nbsp;Branding&nbsp;&nbsp;·&nbsp;&nbsp;Design
+                        </div>
+
+                        {/* Heading */}
+                        <h1 className="text-5xl md:text-6xl lg:text-[5.5rem] font-serif font-normal leading-[1.2] text-black tracking-tight">
+                            Investing in the<br />
+                            Future
+                            {' '}of{' '}
+                            <span style={{ color: '#b1a26b' }}>Healthcare</span>
+                        </h1>
                     </div>
 
-                    {/* Heading */}
-                    <h1 className="text-6xl md:text-7xl lg:text-8xl font-serif font-semibold leading-[1.05] text-foreground tracking-tight max-w-5xl">
-                        Investing in the{' '}
-                        <span className="text-brand-lime">future</span>
-                        <br />of healthcare.
-                    </h1>
+                    {/* Right column: description + CTA */}
+                    <div style={{ flex: '0 0 360px' }} className="flex flex-col gap-7">
+                        <p className="text-base md:text-lg lg:text-xl text-black/75 leading-relaxed">
+                            We are a healthcare investment fund focused on transforming care delivery and improving patient outcomes.
+                        </p>
 
-                    {/* Subtext */}
-                    <p className="mt-6 text-lg md:text-xl text-brand-gray leading-relaxed max-w-xl">
-                        We are a healthcare investment fund focused on transforming care delivery and improving patient outcomes.
-                    </p>
-
-                    {/* CTA */}
-                    <div className="mt-10">
+                        {/* CTA */}
                         <Link
-                            href="/core"
-                            className="inline-flex items-center gap-3 px-6 py-3 text-sm font-semibold border border-black/20 rounded-sm bg-transparent hover:bg-brand-lime hover:border-brand-lime transition-all duration-300"
+                            href="/contact"
+                            className="inline-flex items-center gap-2 self-start text-[14px] font-bold uppercase tracking-[0.30em] text-black border border-black/30 rounded-full px-10 py-5 hover:bg-[#b1a26b] hover:text-white hover:border-[#b1a26b] transition-all duration-300"
                         >
-                            <ArrowRight className="h-4 w-4" />
-                            <span>Explore our Strategy</span>
+                            <span>Let&apos;s Chat</span>
+                            <span className="inline-flex items-center justify-center w-5 h-5 rounded-full border border-current">
+                                <ArrowRight className="h-2.5 w-2.5" />
+                            </span>
                         </Link>
                     </div>
                 </div>
