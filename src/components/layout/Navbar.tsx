@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -24,65 +24,59 @@ export const Navbar = () => {
     ];
 
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-6 px-4">
+        <nav className="fixed top-0 left-0 right-0 z-50 pt-5 px-6 md:px-12">
+          <div
+              className="mx-auto transition-all duration-700 ease-in-out"
+              style={{ maxWidth: scrolled ? '700px' : '800px' }}
+          >
             <div
-                style={{
-                    maxWidth: scrolled ? '50rem' : '90rem',
-                    transition: 'max-width 0.5s ease-in-out, background-color 0.5s ease-in-out',
-                }}
-                className={`w-full rounded-full px-6 py-1.5 ${
-                    scrolled
-                        ? 'bg-black/60 backdrop-blur-md border border-white/10'
-                        : 'bg-black/86 backdrop-blur-md border border-white/8'
-                }`}
+                className="flex items-center justify-between rounded-full bg-black/85 backdrop-blur-md px-5 py-3"
             >
-                <div className="flex items-center">
-                    {/* Logo — left */}
-                    <div className="flex-1">
-                        <Link href="/" className="inline-flex items-center">
-                            <Image
-                                src="/andalus-logo-01.svg"
-                                alt="Andalus"
-                                width={160}
-                                height={60}
-                                className="h-11 w-auto mt-1" 
-                                priority
-                                unoptimized
-                            />
-                        </Link>
-                    </div>
+                {/* Logo — left */}
+                <Link
+                    href="/"
+                    className="inline-flex items-center px-2"
+                >
+                    <Image
+                        src="/andalus-logo-01.svg"
+                        alt="Andalus"
+                        width={140}
+                        height={48}
+                        className="h-10 w-auto"
+                        priority
+                        unoptimized
+                    />
+                </Link>
 
-                    {/* Nav links — true center */}
-                    <div className="hidden md:flex items-center gap-1">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                className={`px-4 py-1.5 rounded-full text-sm font-medium tracking-wide uppercase transition-all ${
-                                    pathname === link.href
-                                        ? 'bg-white/15 text-white'
-                                        : 'text-white/100 hover:text-white hover:bg-white/10'
-                                }`}
-                            >
-                                {link.name}
-                            </Link>
-                        ))}
-                    </div>
-
-                    {/* CTA — right */}
-                    <div className="flex-1 flex justify-end">
+                {/* Center — nav links */}
+                <div className="hidden md:flex items-center gap-1">
+                    {navLinks.map((link) => (
                         <Link
-                            href="/contact"
-                            className="group inline-flex items-center gap-2 text-sm font-semibold text-white"
+                            key={link.href}
+                            href={link.href}
+                            className={`px-5 py-2 rounded-full text-xs font-regular tracking-[0.15em] uppercase transition-all ${
+                                pathname === link.href
+                                    ? 'bg-white/15 text-white'
+                                    : 'text-white/100 hover:text-white hover:bg-white/10'
+                            }`}
                         >
-                            CONTACT US
-                            <span className="flex items-center justify-center w-8 h-8 rounded-full border border-white/40 text-white transition-colors duration-300 group-hover:bg-brand-lime group-hover:border-brand-lime group-hover:text-black">
-                                <ArrowUpRight className="w-4 h-4" />
-                            </span>
+                            {link.name}
                         </Link>
-                    </div>
+                    ))}
                 </div>
+
+                {/* Right — CTA */}
+                <Link
+                    href="/contact"
+                    className="group hidden md:inline-flex items-center gap-2.5 pl-4 pr-2 py-1.5 text-xs font-bold text-white uppercase tracking-[0.15em]"
+                >
+                    Contact Us
+                    <span className="flex items-center justify-center w-8 h-8 rounded-full border border-white/25 text-white transition-colors duration-300 group-hover:bg-brand-lime group-hover:border-brand-lime group-hover:text-black">
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                    </span>
+                </Link>
             </div>
+          </div>
         </nav>
     );
 };

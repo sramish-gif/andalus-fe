@@ -1,10 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
-import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
-
-const PEEK_VH = 22;
+import { useEffect, useRef } from 'react';
 
 export const Hero = () => {
     const videoContainerRef = useRef<HTMLDivElement>(null);
@@ -16,51 +12,56 @@ export const Hero = () => {
 
             const scrollY = window.scrollY;
             const vh = window.innerHeight;
+            const vw = window.innerWidth;
 
-            // Phase 1: expand video from peek to full screen (scroll 0 → vh)
-            const expandProgress = Math.min(1, Math.max(0, scrollY / vh));
+            // Progress 0 → 1 over one viewport of scrolling
+            const progress = Math.min(1, Math.max(0, scrollY / vh));
 
-            // Phase 2: contract video back (add insets) before next section overlaps
-            // Kicks in during the latter portion of the scroll expansion space
-            const contractStart = vh * 1.25;
-            const contractEnd = vh * 1.85;
-            const contractProgress = Math.min(1, Math.max(0, (scrollY - contractStart) / (contractEnd - contractStart)));
+            // Start: wide block with margins, peeking from below hero
+            const startW = vw * 0.94;
+            const startH = vh * 0.45;
+            const startLeft = (vw - startW) / 2;
+            const startTop = vh - startH * 0.35;
 
-            const height = PEEK_VH + (100 - PEEK_VH) * expandProgress;
-            const inset = 3 * (1 - expandProgress + contractProgress);
-            const topRadius = 12 * (1 - expandProgress + contractProgress);
-            const bottomRadius = 12 * contractProgress;
+            // End: full screen
+            const endW = vw;
+            const endH = vh;
+            const endLeft = 0;
+            const endTop = 0;
 
-            el.style.height = `${height}vh`;
-            el.style.left = `${inset}%`;
-            el.style.right = `${inset}%`;
-            el.style.borderTopLeftRadius = `${topRadius}px`;
-            el.style.borderTopRightRadius = `${topRadius}px`;
-            el.style.borderBottomLeftRadius = `${bottomRadius}px`;
-            el.style.borderBottomRightRadius = `${bottomRadius}px`;
+            // Interpolate
+            const w = startW + (endW - startW) * progress;
+            const h = startH + (endH - startH) * progress;
+            const left = startLeft + (endLeft - startLeft) * progress;
+            const top = startTop + (endTop - startTop) * progress;
+            const radius = 16 * (1 - progress);
+
+            el.style.width = `${w}px`;
+            el.style.height = `${h}px`;
+            el.style.left = `${left}px`;
+            el.style.top = `${top}px`;
+            el.style.borderRadius = `${radius}px`;
         };
 
         window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update, { passive: true });
         update();
-        return () => window.removeEventListener('scroll', update);
+        return () => {
+            window.removeEventListener('scroll', update);
+            window.removeEventListener('resize', update);
+        };
     }, []);
 
     return (
         <>
-            {/* Fixed video — expands from bottom peek to full screen on scroll */}
+            {/* Fixed video — starts bottom, expands to full screen on scroll */}
             <div
                 ref={videoContainerRef}
                 style={{
                     position: 'fixed',
-                    bottom: 0,
-                    left: '3%',
-                    right: '3%',
-                    height: `${PEEK_VH}vh`,
-                    borderTopLeftRadius: '10px',
-                    borderTopRightRadius: '10px',
                     overflow: 'hidden',
-                    zIndex: 10,
-                    willChange: 'height, left, right, border-radius',
+                    zIndex: 25,
+                    willChange: 'width, height, left, top, border-radius',
                 }}
             >
                 <video
@@ -76,27 +77,20 @@ export const Hero = () => {
 
             {/* Hero section — 100vh */}
             <section style={{ height: '100vh', position: 'relative' }}>
-                {/* Solid background covers only the text area (top portion) */}
-                {/* Solid background — keeps video hidden */}
+                {/* Full background */}
                 <div
                     style={{
                         position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: `${PEEK_VH}vh`,
+                        inset: 0,
                         backgroundColor: 'var(--background)',
                         zIndex: 20,
                     }}
                 />
-                {/* Pattern overlay — opacity controlled independently */}
+                {/* Pattern overlay */}
                 <div
                     style={{
                         position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: `${PEEK_VH}vh`,
+                        inset: 0,
                         backgroundImage: 'url(/bg-pattern-2.svg)',
                         backgroundSize: 'cover',
                         backgroundPosition: 'center top',
@@ -105,59 +99,54 @@ export const Hero = () => {
                     }}
                 />
 
-                {/* Text content */}
+                {/* Content layer */}
                 <div
-                    className="container mx-auto px-6 md:px-12"
                     style={{
-                        position: 'relative',
-                        zIndex: 22,
-                        height: `${100 - PEEK_VH}vh`,
-                        display: 'flex',
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        paddingTop: '4rem',
-                        gap: '3rem',
+                        position: 'absolute',
+                        inset: 0,
+                        zIndex: 26,
+                        pointerEvents: 'none',
                     }}
                 >
-                    {/* Left column: label + heading */}
-                    <div style={{ flex: '1 1 0', minWidth: 0 }}>
-                        {/* Small label */}
-                        <div className="mb-5 text-[10px] font-medium uppercase tracking-[0.25em] text-black/60">
-                            Strategy&nbsp;&nbsp;·&nbsp;&nbsp;Branding&nbsp;&nbsp;·&nbsp;&nbsp;Design
+                    <div
+                        className="container mx-auto px-6 md:px-12 pt-80"
+                        style={{
+                            position: 'relative',
+                            height: '100%',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'flex-center',
+                            paddingBottom: '18vh',
+                        }}
+                    >
+                        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+                            {/* Left — label + heading */}
+                            <div>
+                                {/* Label */}
+                                <span className="inline-flex items-center gap-2 mb-6 text-xs font-medium uppercase tracking-[0.2em] text-black/50" style={{ fontFamily: '"Google Sans", sans-serif' }}>
+                                    <span className="w-1.5 h-1.5 rounded-full bg-black/40" />
+                                    Healthcare Investment Fund
+                                </span>
+
+                                <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-8xl leading-[1.05] tracking-[-0.05em] text-foreground" style={{ fontFamily: '"Google Sans", sans-serif', fontWeight: 600 }}>
+                                    Investing in the<br />
+                                    Future of{' '}
+                                    <span style={{ fontFamily: '"Lora", serif', fontStyle: 'italic', fontWeight: 400 }}>Healthcare</span>
+                                </h1>
+                            </div>
+
+                            {/* Right — paragraph */}
+                            <div className="md:max-w-sm md:pb-2">
+                                <p className="text-sm md:text-base text-black/60 leading-relaxed" style={{ fontFamily: '"Google Sans", sans-serif' }}>
+                                    We are a healthcare investment fund focused on transforming care delivery and improving patient outcomes.
+                                </p>
+                            </div>
                         </div>
-
-                        {/* Heading */}
-                        <h1 className="text-5xl md:text-6xl lg:text-[5.5rem] font-serif font-normal leading-[1.2] text-black tracking-tight">
-                            Investing in the<br />
-                            Future
-                            {' '}of{' '}
-                            <span style={{ color: '#b1a26b' }}>Healthcare</span>
-                        </h1>
-                    </div>
-
-                    {/* Right column: description + CTA */}
-                    <div style={{ flex: '0 0 360px' }} className="flex flex-col gap-7">
-                        <p className="text-base md:text-lg lg:text-xl text-black/75 leading-relaxed">
-                            We are a healthcare investment fund focused on transforming care delivery and improving patient outcomes.
-                        </p>
-
-                        {/* CTA */}
-                        <Link
-                            href="/contact"
-                            className="inline-flex items-center gap-2 self-start text-[14px] font-bold uppercase tracking-[0.30em] text-black border border-black/30 rounded-full px-10 py-5 hover:bg-[#b1a26b] hover:text-white hover:border-[#b1a26b] transition-all duration-300"
-                        >
-                            <span>Let&apos;s Chat</span>
-                            <span className="inline-flex items-center justify-center w-5 h-5 rounded-full border border-current">
-                                <ArrowRight className="h-2.5 w-2.5" />
-                            </span>
-                        </Link>
                     </div>
                 </div>
-                {/* Bottom PEEK_VH portion is transparent — the fixed video shows through here */}
             </section>
 
-            {/* Scroll expansion space — scrolling through here drives the video from peek → full screen */}
+            {/* Scroll expansion space */}
             <div style={{ height: '100vh', position: 'relative', zIndex: 5 }} />
         </>
     );
