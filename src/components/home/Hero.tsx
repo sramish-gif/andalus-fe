@@ -91,7 +91,7 @@ export const Hero = () => {
                     style={{
                         position: 'absolute',
                         inset: 0,
-                        backgroundImage: 'url(/bg-pattern-2.svg)',
+                        backgroundImage: 'url(/bg-pattern-4.svg)',
                         backgroundSize: 'cover',
                         backgroundPosition: 'center top',
                         opacity: 0.45,
@@ -109,7 +109,7 @@ export const Hero = () => {
                     }}
                 >
                     <div
-                        className="container mx-auto px-6 md:px-12 pt-80"
+                        className="container mx-auto px-6 md:px-12 pt-80 "
                         style={{
                             position: 'relative',
                             height: '100%',
@@ -123,21 +123,21 @@ export const Hero = () => {
                             {/* Left — label + heading */}
                             <div>
                                 {/* Label */}
-                                <span className="inline-flex items-center gap-2 mb-6 text-xs font-medium uppercase tracking-[0.2em] text-black/50" style={{ fontFamily: '"Google Sans", sans-serif' }}>
-                                    <span className="w-1.5 h-1.5 rounded-full bg-black/40" />
-                                    Healthcare Investment Fund
+                                <span className="animated-border-pill inline-flex items-center gap-2 mb-6 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em]" style={{ fontFamily: '"Google Sans", sans-serif', color: '#B1A26B' }}>
+                                    <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#B1A26B' }} />
+                                    Healthcare Investment Platform
                                 </span>
 
-                                <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-8xl leading-[1.05] tracking-[-0.05em] text-foreground" style={{ fontFamily: '"Google Sans", sans-serif', fontWeight: 600 }}>
+                                <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-8xl leading-[1.05] tracking-[-0.05em] text-black" style={{ fontFamily: '"Google Sans", sans-serif', fontWeight: 600 }}>
                                     Investing in the<br />
                                     Future of{' '}
-                                    <span style={{ fontFamily: '"Lora", serif', fontStyle: 'italic', fontWeight: 400 }}>Healthcare</span>
+                                    <span style={{ fontFamily: '"Lora", serif', fontStyle: 'italic', fontWeight: 500, color: '#B1A26B' }}>Healthcare</span>
                                 </h1>
                             </div>
 
                             {/* Right — paragraph */}
-                            <div className="md:max-w-sm md:pb-2">
-                                <p className="text-sm md:text-base text-black/60 leading-relaxed" style={{ fontFamily: '"Google Sans", sans-serif' }}>
+                            <div className="md:max-w-md md:pb-2">
+                                <p className="text-black/60 leading-relaxed" style={{ fontFamily: '"Google Sans", sans-serif', fontSize: '24px' }}>
                                     We are a healthcare investment fund focused on transforming care delivery and improving patient outcomes.
                                 </p>
                             </div>

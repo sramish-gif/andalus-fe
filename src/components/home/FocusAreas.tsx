@@ -161,16 +161,16 @@ export const FocusAreas = () => {
                 {/* Left: heading */}
                 <div style={{ flex: '0 0 35%' }}>
                     <p className="text-sm font-medium uppercase tracking-widest text-brand-gray mb-4">
-                        What We Back
+                        What We Do
                     </p>
-                    <h2 className="text-5xl md:text-6xl font-serif font-normal leading-tight text-foreground">
-                        Our Focus<br />Areas
+                    <h2 className="text-5xl md:text-6xl font-serif font-semibold leading-tight text-foreground">
+                        Our <span style={{ fontFamily: '"Lora", serif', fontStyle: 'italic' }}>Focus</span><br />Areas
                     </h2>
                 </div>
 
 
                 {/* Right: cards that slide in from the right */}
-                <div style={{ flex: 1, position: 'relative', height: '60vh' }}>
+                <div style={{ flex: '0 0 55%', position: 'relative', height: '60vh' }}>
                     {areas.map((area, i) => (
                         <div
                             key={area.number}
@@ -210,14 +210,20 @@ export const FocusAreas = () => {
                             {/* Text — pinned to bottom */}
                             <div className="mt-auto">
                                 <h3
-                                    className="text-3xl md:text-4xl font-serif font-normal mb-4 leading-snug"
+                                    className="text-3xl md:text-4xl font-serif font-medium mb-4 leading-snug"
                                     style={{ color: area.textColor }}
                                 >
                                     {area.title}
                                 </h3>
                                 <p
-                                    className="text-base md:text-lg leading-relaxed max-w-sm"
-                                    style={{ color: area.mutedColor }}
+                                    className="text-base md:text-lg leading-relaxed"
+                                    style={{
+                                        color: area.mutedColor,
+                                        display: '-webkit-box',
+                                        WebkitLineClamp: 2,
+                                        WebkitBoxOrient: 'vertical',
+                                        overflow: 'hidden',
+                                    }}
                                 >
                                     {area.description}
                                 </p>

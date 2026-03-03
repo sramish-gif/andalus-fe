@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #FAF8EF;
+  --background: #ffffff;
   --foreground: #111827;
   --brand-lime: #C7B374;
   --brand-gray: #6b7280;
@@ -33,6 +33,25 @@ body {
     background-size: 60px 60px;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='0' cy='0' r='1.5' fill='rgba(0%2C0%2C0%2C0.28)'/%3E%3Cline x1='0' y1='0' x2='60' y2='0' stroke='rgba(0%2C0%2C0%2C0.1)' stroke-width='0.6' stroke-dasharray='2 10'/%3E%3Cline x1='0' y1='0' x2='0' y2='60' stroke='rgba(0%2C0%2C0%2C0.1)' stroke-width='0.6' stroke-dasharray='2 10'/%3E%3C/svg%3E");
   }
+}
+
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotateBorder {
+  to { --border-angle: 360deg; }
+}
+
+.animated-border-pill {
+  border: 1.5px solid transparent;
+  border-radius: 9999px;
+  background:
+    linear-gradient(white, white) padding-box,
+    conic-gradient(from var(--border-angle), transparent 70%, #B1A26B 85%, transparent 100%) border-box;
+  animation: rotateBorder 2.5s linear infinite;
 }
 
 @keyframes scrollLine {

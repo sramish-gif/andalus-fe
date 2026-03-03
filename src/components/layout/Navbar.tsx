@@ -27,7 +27,7 @@ export const Navbar = () => {
         <nav className="fixed top-0 left-0 right-0 z-50 pt-5 px-6 md:px-12">
           <div
               className="mx-auto transition-all duration-700 ease-in-out"
-              style={{ maxWidth: scrolled ? '700px' : '800px' }}
+              style={{ maxWidth: scrolled ? '700px' : '1500px' }}
           >
             <div
                 className="flex items-center justify-between rounded-full bg-black/85 backdrop-blur-md px-5 py-3"

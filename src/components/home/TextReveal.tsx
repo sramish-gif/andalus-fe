@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
 const TEXT =
-    "We're Andalus, a forward-thinking investment firm crafting the future of healthcare across strategy, innovation, and a wide range of clinical systems. We lead investments at the intersection of technology and care delivery, exploring digital health, diagnostics, and transformative patient experiences.";
+    "We're Andalus, a forward-thinking investment firm crafting the future of healthcare across strategy, innovation, and a wide range of clinical systems.";
 
 const words = TEXT.split(' ');
 
@@ -27,7 +27,12 @@ export const TextReveal = () => {
 
             wordRefs.current.forEach((span, i) => {
                 if (!span) return;
-                span.style.color = i < filledCount ? '#000000' : '#d1d5db';
+                const revealed = i < filledCount;
+                if (words[i] === 'Andalus,') {
+                    span.style.color = revealed ? '#000000' : '#d8dce4';
+                } else {
+                    span.style.color = revealed ? '#000000' : '#d8dce4';
+                }
             });
         };
 
@@ -64,7 +69,7 @@ export const TextReveal = () => {
 
                     {/* Text */}
                     <p
-                        className="text-4xl md:text-5xl lg:text-[4.5rem] font-serif font-normal leading-[1.2] tracking-tight"
+                        className="text-4xl md:text-5xl lg:text-[4.5rem] font-serif font-medium leading-[1.3] tracking-tight"
                         style={{ textAlign: 'left' }}
                     >
                         {words.map((word, i) => (
@@ -74,6 +79,10 @@ export const TextReveal = () => {
                                 style={{
                                     color: '#d8dce4',
                                     transition: 'color 0.15s ease',
+                                    ...(word === 'Andalus,' && {
+                                        fontFamily: '"Lora", serif',
+                                        fontStyle: 'italic ',
+                                    }),
                                 }}
                             >
                                 {word}{i < words.length - 1 ? ' ' : ''}

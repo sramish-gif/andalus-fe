@@ -38,8 +38,8 @@ export const FeaturedPortfolio = () => {
                 <p className="text-sm font-medium uppercase tracking-widest text-brand-gray mb-4">
                     Our Work
                 </p>
-                <h2 className="text-5xl md:text-6xl font-serif font-normal leading-tight text-foreground">
-                    Featured Portfolio
+                <h2 className="text-5xl md:text-6xl font-serif font-semibold leading-tight text-foreground">
+                    Featured <span style={{ fontFamily: '"Lora", serif', fontStyle: 'italic' }}>Portfolio</span>
                 </h2>
             </div>
 
