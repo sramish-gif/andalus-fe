@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 
 export const Hero = () => {
     const videoContainerRef = useRef<HTMLDivElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const update = () => {
@@ -41,6 +42,17 @@ export const Hero = () => {
             el.style.left = `${left}px`;
             el.style.top = `${top}px`;
             el.style.borderRadius = `${radius}px`;
+
+            // Animate content — scale down + fade out
+            const contentEl = contentRef.current;
+            if (contentEl) {
+                const textProgress = Math.min(1, Math.max(0, scrollY / (vh * 0.6)));
+                const scale = 1 - textProgress * 0.08;
+                const opacity = Math.max(0, 1 - textProgress);
+                contentEl.style.transform = `scale(${scale})`;
+                contentEl.style.opacity = `${opacity}`;
+                contentEl.style.visibility = opacity <= 0 ? 'hidden' : 'visible';
+            }
         };
 
         window.addEventListener('scroll', update, { passive: true });
@@ -60,7 +72,7 @@ export const Hero = () => {
                 style={{
                     position: 'fixed',
                     overflow: 'hidden',
-                    zIndex: 25,
+                    zIndex: 27,
                     willChange: 'width, height, left, top, border-radius',
                 }}
             >
@@ -94,18 +106,23 @@ export const Hero = () => {
                         backgroundImage: 'url(/bg-pattern-4.svg)',
                         backgroundSize: 'cover',
                         backgroundPosition: 'center top',
-                        opacity: 0.45,
+                        opacity: 0.18,
                         zIndex: 21,
                     }}
                 />
 
-                {/* Content layer */}
+                {/* Content layer — fixed so it stays in place */}
                 <div
+                    ref={contentRef}
                     style={{
-                        position: 'absolute',
-                        inset: 0,
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
                         zIndex: 26,
                         pointerEvents: 'none',
+                        willChange: 'transform, opacity',
                     }}
                 >
                     <div

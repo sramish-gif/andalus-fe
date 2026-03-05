@@ -30,7 +30,7 @@ export const Navbar = () => {
               style={{ maxWidth: scrolled ? '700px' : '1500px' }}
           >
             <div
-                className="flex items-center justify-between rounded-full bg-black/85 backdrop-blur-md px-5 py-3"
+                className="flex items-center justify-between rounded-full bg-black/80 backdrop-blur-md px-5 py-3"
             >
                 {/* Logo — left */}
                 <Link

@@ -62,12 +62,7 @@ export const TextReveal = () => {
                 }}
             >
                 <div style={{ maxWidth: '1600px', padding: '0 2rem', margin: '0 auto' }}>
-                    {/* Tag */}
-                    <p className="text-sm font-medium uppercase tracking-widest text-brand-gray mb-8">
-                        About Andalus
-                    </p>
-
-                    {/* Text */}
+{/* Text */}
                     <p
                         className="text-4xl md:text-5xl lg:text-[4.5rem] font-serif font-medium leading-[1.3] tracking-tight"
                         style={{ textAlign: 'left' }}

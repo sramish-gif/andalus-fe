@@ -1,95 +1,119 @@
-import React from 'react';
-import Link from 'next/link';
+'use client';
 
 const projects = [
     {
+        tag: 'Healthcare facility',
+        date: '8/14/24',
         title: 'Novacare Hospitals',
-        category: 'Creative, Interaction',
-        year: '2024',
-        description:
-            'Crafting an end-to-end dating app that reimagines the experience with intentional, gamified mechanics',
+        description: 'Healthcare & Medical infrastructure',
         image: '/portfolio-1.jpeg',
-        bg: '#E8A84C',
-        href: '/projects/ballpitt',
     },
     {
+        tag: 'Diagnostics brand',
+        date: '3/6/25',
         title: 'RaiDx Diagnostic',
-        category: 'Strategy, Branding',
-        year: '2025',
-        description:
-            'Building a modern healthcare brand identity that communicates trust, innovation, and patient-first values',
+        description: 'Branding & Identity design',
         image: '/portfolio-2.jpeg',
-        bg: '#1A2A2C',
-        href: '/projects/andalus-healthcare',
     },
 ];
 
 export const FeaturedPortfolio = () => {
     return (
-        <section
-            style={{
-                position: 'relative',
-                zIndex: 35,
-                backgroundColor: 'var(--background)',
-            }}
-        >
-            {/* Section header */}
-            <div className="container mx-auto px-6 pt-50 pb-14">
-                <p className="text-sm font-medium uppercase tracking-widest text-brand-gray mb-4">
-                    Our Work
-                </p>
-                <h2 className="text-5xl md:text-6xl font-serif font-semibold leading-tight text-foreground">
-                    Featured <span style={{ fontFamily: '"Lora", serif', fontStyle: 'italic' }}>Portfolio</span>
-                </h2>
-            </div>
-
-            {/* Cards */}
-            <div className="container mx-auto px-6 pb-32 flex flex-col gap-20">
-                {projects.map((project) => (
-                    <div key={project.title} className="group">
-                        {/* Image */}
-                        <div
-                            className="w-full overflow-hidden rounded-lg"
-                            style={{ aspectRatio: '16 / 10', backgroundColor: project.bg }}
+        <>
+            <section
+                style={{
+                    position: 'relative',
+                    zIndex: 35,
+                    backgroundColor: '#0a0a0a',
+                    marginTop: 0,
+                    padding: '6rem 0 6rem',
+                }}
+            >
+                <div
+                    style={{
+                        maxWidth: '1600px',
+                        margin: '0 auto',
+                        padding: '0 2rem',
+                    }}
+                >
+                    {/* Heading */}
+                    <div style={{ marginBottom: '3.5rem' }}>
+                        <h2
+                            className="text-5xl md:text-6xl font-serif font-semibold leading-tight"
+                            style={{ color: '#ffffff' }}
                         >
-                            <img
-                                src={project.image}
-                                alt={project.title}
-                                className="w-full h-full object-cover"
-                            />
-                        </div>
+                            Featured{' '}
+                            <span style={{ fontFamily: '"Lora", serif', fontStyle: 'italic' }}>
+                                Portfolio
+                            </span>
+                        </h2>
+                    </div>
 
-                        {/* Info row */}
-                        <div className="flex flex-col md:flex-row md:justify-between mt-8 gap-6">
-                            {/* Left — title, category, year */}
-                            <div>
-                                <h3 className="text-3xl md:text-4xl font-serif font-normal text-foreground mb-2">
+                    {/* Portfolio grid */}
+                    <div
+                        style={{
+                            display: 'flex',
+                            gap: '3rem',
+                        }}
+                    >
+                        {projects.map((project) => (
+                            <div
+                                key={project.title}
+                                style={{ flex: '1 1 0', minWidth: 0, cursor: 'pointer' }}
+                            >
+                                {/* Title */}
+                                <h3
+                                    className="text-2xl md:text-3xl font-serif font-medium"
+                                    style={{
+                                        color: '#ffffff',
+                                        marginBottom: '0.35rem',
+                                    }}
+                                >
                                     {project.title}
                                 </h3>
-                                <p className="text-base text-brand-gray">
-                                    Category: {project.category}
-                                </p>
-                                <p className="text-base text-brand-gray">
-                                    Year: {project.year}
-                                </p>
-                            </div>
 
-                            {/* Right — description + link */}
-                            <div className="max-w-md">
-                                <p className="text-base md:text-lg text-foreground/75 leading-relaxed mb-4">
+                                {/* Description */}
+                                <p
+                                    style={{
+                                        fontSize: '15px',
+                                        color: 'rgba(255,255,255,0.4)',
+                                        marginBottom: '1.25rem',
+                                    }}
+                                >
                                     {project.description}
                                 </p>
-                                <Link
-                                    href={project.href}
-                                    className="text-base font-medium text-foreground underline underline-offset-4 hover:opacity-70 transition-opacity"
+
+                                {/* Image */}
+                                <div
+                                    style={{
+                                        borderRadius: '16px',
+                                        overflow: 'hidden',
+                                        aspectRatio: '4 / 3',
+                                    }}
                                 >
-                                    View Project
-                                </Link>
+                                    <img
+                                        src={project.image}
+                                        alt={project.title}
+                                        style={{
+                                            width: '100%',
+                                            height: '100%',
+                                            objectFit: 'cover',
+                                            display: 'block',
+                                            transition: 'transform 0.5s ease',
+                                        }}
+                                        onMouseEnter={(e) => {
+                                            e.currentTarget.style.transform = 'scale(1.03)';
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            e.currentTarget.style.transform = 'scale(1)';
+                                        }}
+                                    />
+                                </div>
                             </div>
-                        </div>
+                        ))}
                     </div>
-                ))}
-            </div>
-        </section>
+                </div>
+            </section>
+        </>
     );
 };
