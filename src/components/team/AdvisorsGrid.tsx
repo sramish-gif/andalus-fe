@@ -3,22 +3,22 @@
 const advisors = [
     {
         name: 'Dr. Mahesh Singh',
-        // role: 'Healthcare Strategy Advisor',
+        role: '',
         image: '/member-9.webp',
     },
     {
         name: 'Christian Schumacher',
-        // role: 'Clinical Research Advisor',
+        role: '',
         image: '/member-10.webp',
     },
     {
         name: 'Emad Al Jahdali',
-        // role: 'Financial Advisory Board',
+        role: '',
         image: '/member-11.webp',
     },
     {
         name: 'Dania Alsammarae',
-        // role: 'Life Sciences Advisor',
+        role: '',
         image: '/member-12.webp',
     },
 ];
