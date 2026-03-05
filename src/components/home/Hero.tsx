@@ -74,6 +74,11 @@ export const Hero = () => {
                     overflow: 'hidden',
                     zIndex: 27,
                     willChange: 'width, height, left, top, border-radius',
+                    width: '94vw',
+                    height: '45vh',
+                    left: '3vw',
+                    top: 'calc(100vh - 45vh * 0.35)',
+                    borderRadius: '16px',
                 }}
             >
                 <video
@@ -140,12 +145,12 @@ export const Hero = () => {
                             {/* Left — label + heading */}
                             <div>
                                 {/* Label */}
-                                <span className="animated-border-pill inline-flex items-center gap-2 mb-6 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em]" style={{ fontFamily: '"Google Sans", sans-serif', color: '#B1A26B' }}>
+                                <span className="animated-border-pill animate-fade-slide-up inline-flex items-center gap-2 mb-6 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em]" style={{ fontFamily: '"Google Sans", sans-serif', color: '#B1A26B' }}>
                                     <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#B1A26B' }} />
                                     Healthcare Investment Platform
                                 </span>
 
-                                <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-8xl leading-[1.05] tracking-[-0.05em] text-black" style={{ fontFamily: '"Google Sans", sans-serif', fontWeight: 600 }}>
+                                <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-8xl leading-[1.05] tracking-[-0.05em] text-black animate-fade-slide-up animate-delay-700" style={{ fontFamily: '"Google Sans", sans-serif', fontWeight: 600 }}>
                                     Investing in the<br />
                                     Future of{' '}
                                     <span style={{ fontFamily: '"Lora", serif', fontStyle: 'italic', fontWeight: 500, color: '#B1A26B' }}>Healthcare</span>
@@ -154,7 +159,7 @@ export const Hero = () => {
 
                             {/* Right — paragraph */}
                             <div className="md:max-w-md md:pb-2">
-                                <p className="text-black/60 leading-relaxed" style={{ fontFamily: '"Google Sans", sans-serif', fontSize: '24px' }}>
+                                <p className="text-black/60 leading-relaxed animate-fade-slide-up animate-delay-900" style={{ fontFamily: '"Google Sans", sans-serif', fontSize: '24px' }}>
                                     We are a healthcare investment fund focused on transforming care delivery and improving patient outcomes.
                                 </p>
                             </div>

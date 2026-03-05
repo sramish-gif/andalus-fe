@@ -201,16 +201,16 @@ export const Footer = () => {
                 {/* Brand text */}
                 <div
                     style={{
-                        fontFamily: '"Google Sans", sans-serif',
-                        fontSize: 'clamp(3rem, 8vw, 8rem)',
-                        fontWeight: 700,
+                        fontFamily: '"Lora", serif',
+                        fontStyle: 'italic',
+                        fontSize: 'clamp(3rem, 8vw, 7rem)',
+                        fontWeight: 400,
                         lineHeight: 1,
                         color: '#1a1a1a',
                         letterSpacing: '-0.03em',
-                        textTransform: 'uppercase',
                     }}
                 >
-                    ANDALUS
+                    Andalus
                 </div>
 
                 {/* Social links */}

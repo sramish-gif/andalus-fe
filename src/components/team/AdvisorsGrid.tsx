@@ -2,24 +2,24 @@
 
 const advisors = [
     {
-        name: 'Dr. Richard Hayes',
-        role: 'Healthcare Strategy Advisor',
-        image: '/member-5.webp',
+        name: 'Dr. Mahesh Singh',
+        // role: 'Healthcare Strategy Advisor',
+        image: '/member-9.webp',
     },
     {
-        name: 'Prof. Amina Khalil',
-        role: 'Clinical Research Advisor',
-        image: '/member-6.webp',
+        name: 'Christian Schumacher',
+        // role: 'Clinical Research Advisor',
+        image: '/member-10.webp',
     },
     {
-        name: 'Michael Torres',
-        role: 'Financial Advisory Board',
-        image: '/member-7.webp',
+        name: 'Emad Al Jahdali',
+        // role: 'Financial Advisory Board',
+        image: '/member-11.webp',
     },
     {
-        name: 'Dr. Elena Petrova',
-        role: 'Life Sciences Advisor',
-        image: '/member-8.webp',
+        name: 'Dania Alsammarae',
+        // role: 'Life Sciences Advisor',
+        image: '/member-12.webp',
     },
 ];
 

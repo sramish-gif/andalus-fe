@@ -13,26 +13,29 @@ export default function ContactPage() {
   const dotTop = useTransform(scrollYProgress, [0, 1], ["0%", "97%"]);
 
   return (
-    <div ref={containerRef} className="bg-white min-h-screen text-foreground overflow-y-auto h-screen">
+    <div ref={containerRef} className="min-h-screen text-foreground overflow-y-auto h-screen" style={{ backgroundColor: 'var(--background)' }}>
       {/* Hero Heading */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-        className="px-10 pt-36 pb-20"
-      >
-        <h1
-          className="text-foreground tracking-[-0.04em]"
-          style={{
-            fontSize: "clamp(4rem, 12vw, 9rem)",
-            fontWeight: 800,
-            lineHeight: 0.95,
-            fontFamily: '"Google Sans", sans-serif',
-          }}
+      <div className="text-center" style={{ maxWidth: '1000px', margin: '0 auto', padding: '11rem 2rem 10rem' }}>
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="text-5xl md:text-6xl lg:text-7xl font-serif leading-[1.05] tracking-[-0.05em] font-medium mb-6"
+          style={{ color: '#1a1a1a' }}
         >
-          Contact Us
-        </h1>
-      </motion.div>
+          Get In Touch<br />
+          <span style={{ fontFamily: '"Lora", serif', fontStyle: 'italic', color: '#B1A26B' }}>With Us</span> Today
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+          className="text-base md:text-lg"
+          style={{ color: 'rgba(0,0,0,0.5)' }}
+        >
+          Whether you're exploring healthcare investment opportunities or seeking growth capital, we're here to help.
+        </motion.p>
+      </div>
 
       {/* Contact Info + Form */}
       <motion.div

@@ -5,6 +5,7 @@ import Link from "next/link";
 import Lenis from "lenis";
 import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
 import { Footer } from "@/components/layout/Footer";
+import { CTA } from "@/components/home/CTA";
 
 function AnimatedNumber({ target, inView }: { target: number; inView: boolean }) {
   const motionValue = useMotionValue(0);
@@ -44,88 +45,64 @@ export default function PortfolioPage() {
   }, []);
 
   return (
-    <div className="bg-white min-h-screen text-foreground" style={{ fontFamily: fontGoogle }}>
+    <div className="min-h-screen text-foreground" style={{ fontFamily: fontGoogle, backgroundColor: 'var(--background)' }}>
       {/* Parallax Sections Wrapper */}
       <div className="relative">
         {/* Hero Section */}
-        <section className="sticky top-0 z-10 relative min-h-screen flex flex-col justify-between px-10 pt-36 pb-16 overflow-hidden bg-white">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative z-10"
-          >
-            <h1
-              className="tracking-[-0.03em]"
-              style={{
-                fontSize: "clamp(4.5rem, 14vw, 12rem)",
-                fontWeight: 800,
-                lineHeight: 0.95,
-              }}
+        <section className="sticky top-0 z-10 relative min-h-screen flex flex-col justify-top overflow-hidden mt-55" style={{ backgroundColor: 'var(--background)' }}>
+          <div className="text-center" style={{ maxWidth: '1000px', margin: '0 auto', padding: '0 2rem' }}>
+            <motion.h1
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="text-5xl md:text-6xl lg:text-7xl font-serif leading-[1.05] tracking-[-0.05em] font-medium mb-6"
+              style={{ color: '#1a1a1a' }}
             >
-              Portfolio
-            </h1>
-          </motion.div>
+              Explore our healthcare<br />
+              <span style={{ fontFamily: '"Lora", serif', fontStyle: 'italic', color: '#B1A26B' }}>portfolio</span> of investments
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+              className="text-base md:text-lg"
+              style={{ color: 'rgba(0,0,0,0.5)' }}
+            >
+              From primary care to digital health, our portfolio drives real outcomes across the MENAP region.
+            </motion.p>
 
-          {/* Bottom section — stats left, description right */}
-          <motion.div
-            ref={statsRef}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            className="relative z-10 flex flex-col lg:flex-row items-start lg:items-end justify-between gap-12 mt-auto"
-          >
             {/* Stats */}
-            <div className="flex items-end gap-6 lg:gap-10">
-              <div className="flex items-baseline gap-2">
-                <span
-                  className="tracking-[-0.02em]"
-                  style={{ fontSize: "clamp(3rem, 7vw, 5.5rem)", fontWeight: 700, lineHeight: 1 }}
-                >
+            <motion.div
+              ref={statsRef}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+              className="flex justify-center items-end gap-10 lg:gap-16 mt-14"
+            >
+              <div className="flex flex-col items-center">
+                <span className="tracking-[-0.02em] font-serif" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", fontWeight: 600, lineHeight: 1 }}>
                   <AnimatedNumber target={20} inView={inView} />+
                 </span>
-                <span className="text-foreground/50 text-sm">investments</span>
+                <span className="text-foreground/50 text-sm mt-1">investments</span>
               </div>
-
-              <div className="flex items-baseline gap-2">
-                <span
-                  className="tracking-[-0.02em]"
-                  style={{ fontSize: "clamp(3rem, 7vw, 5.5rem)", fontWeight: 700, lineHeight: 1 }}
-                >
+              <div className="flex flex-col items-center">
+                <span className="tracking-[-0.02em] font-serif" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", fontWeight: 600, lineHeight: 1 }}>
                   <AnimatedNumber target={5} inView={inView} />+
                 </span>
-                <span className="text-foreground/50 text-sm">sectors across MENAP</span>
+                <span className="text-foreground/50 text-sm mt-1">sectors across MENAP</span>
               </div>
-
-              <div className="flex items-baseline gap-2">
-                <span
-                  className="tracking-[-0.02em]"
-                  style={{ fontSize: "clamp(3rem, 7vw, 5.5rem)", fontWeight: 700, lineHeight: 1 }}
-                >
+              <div className="flex flex-col items-center">
+                <span className="tracking-[-0.02em] font-serif" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", fontWeight: 600, lineHeight: 1 }}>
                   <AnimatedNumber target={10} inView={inView} />+
                 </span>
-                <span className="text-foreground/50 text-sm">years in the industry</span>
+                <span className="text-foreground/50 text-sm mt-1">years in the industry</span>
               </div>
-            </div>
-
-            {/* Description text */}
-            <div className="max-w-lg lg:max-w-xl lg:text-right">
-              <p
-                className="tracking-[-0.01em]"
-                style={{ fontSize: "clamp(1.25rem, 2.5vw, 2rem)", fontWeight: 500, lineHeight: 1.3 }}
-              >
-                From primary care to digital health,
-                <br />
-                our portfolio drives real outcomes.
-                <br />
-                Explore our investments below.
-              </p>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </section>
 
         {/* Featured Project 01 */}
-        <section className="sticky top-0 z-20 relative min-h-screen bg-white text-foreground">
+        <section className="sticky top-0 z-20 relative min-h-screen text-foreground" style={{ backgroundColor: '#ffffff' }}>
           <div className="flex flex-col md:flex-row min-h-screen">
             <div className="relative flex flex-col justify-between p-10 md:p-14 md:w-[40%] min-h-[50vh] md:min-h-screen">
               <div>
@@ -198,7 +175,7 @@ export default function PortfolioPage() {
         </section>
 
         {/* Featured Project 02 */}
-        <section className="sticky top-0 z-30 relative min-h-screen bg-white text-foreground">
+        <section className="sticky top-0 z-30 relative min-h-screen text-foreground" style={{ backgroundColor: '#ffffff' }}>
           <div className="flex flex-col md:flex-row min-h-screen">
             <div className="relative flex flex-col justify-between p-10 md:p-14 md:w-[40%] min-h-[50vh] md:min-h-screen">
               <div>
@@ -270,20 +247,7 @@ export default function PortfolioPage() {
       </div>
 
       {/* CTA Section */}
-      <section className="relative z-40 bg-[#1a1a1a] py-24 text-center">
-        <h2 className="text-white tracking-[0.02em] mb-4 text-2xl font-semibold">
-          Ready to Partner With Us?
-        </h2>
-        <p className="text-white/50 mb-10 text-sm">
-          Join us in building the future of healthcare across the MENAP region
-        </p>
-        <Link
-          href="/contact"
-          className="inline-block border border-white text-white text-[13px] font-medium tracking-wide px-10 py-3.5 rounded-full hover:bg-white hover:text-[#1a1a1a] transition-colors duration-200"
-        >
-          Get in Touch
-        </Link>
-      </section>
+      <CTA />
 
       {/* Footer */}
       <Footer />
