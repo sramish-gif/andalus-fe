@@ -1,8 +1,8 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Footer } from "@/components/layout/Footer";
 
 export default function ContactPage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -14,20 +14,45 @@ export default function ContactPage() {
 
   return (
     <div ref={containerRef} className="bg-white min-h-screen text-foreground overflow-y-auto h-screen">
+      {/* Navbar */}
+      <nav className="flex items-center justify-between px-10 h-[68px]">
+        <Link href="/" className="relative shrink-0 h-8">
+          <img
+            src="/assets/images/logo-black.svg"
+            alt="Andalus"
+            className="h-full w-auto"
+          />
+        </Link>
+        <div className="hidden sm:flex items-center gap-7 text-[10.5px] font-bold tracking-[0.12em] uppercase text-foreground">
+          <Link href="/" className="hover:opacity-60 transition-opacity duration-200">
+            Home
+          </Link>
+          <Link href="#" className="hover:opacity-60 transition-opacity duration-200">
+            About
+          </Link>
+          <Link href="#" className="hover:opacity-60 transition-opacity duration-200">
+            Team
+          </Link>
+          <Link href="/portfolio" className="hover:opacity-60 transition-opacity duration-200">
+            Portfolio
+          </Link>
+          <Link href="/contact" className="opacity-60">
+            Contact
+          </Link>
+        </div>
+      </nav>
+
       {/* Hero Heading */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className="px-10 pt-36 pb-20"
+        className="px-10 pt-8 pb-20"
       >
         <h1
-          className="text-foreground tracking-[-0.04em]"
+          className="text-foreground tracking-[-0.03em]"
           style={{
-            fontSize: "clamp(4rem, 12vw, 9rem)",
-            fontWeight: 800,
-            lineHeight: 0.95,
-            fontFamily: '"Google Sans", sans-serif',
+            font: "800 clamp(4rem, 12vw, 9rem)/0.95 var(--font-manrope), sans-serif",
           }}
         >
           Contact Us
@@ -46,31 +71,32 @@ export default function ContactPage() {
           <div className="flex flex-1">
             {/* Animated vertical line with dot */}
             <div ref={timelineRef} className="relative mr-8 w-2.5 shrink-0">
+              {/* Background track */}
               <div className="absolute left-1/2 top-0 bottom-0 w-px bg-black/10 -translate-x-1/2" />
+              {/* Green fill that follows the dot */}
               <motion.div
-                className="absolute left-1/2 top-0 w-px bg-[#B1A26B] -translate-x-1/2 origin-top"
+                className="absolute left-1/2 top-0 w-px bg-[#dfcd8f] -translate-x-1/2 origin-top"
                 style={{ height: dotTop }}
               />
+              {/* Dot */}
               <motion.div
-                className="absolute left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-[#B1A26B]"
+                className="absolute left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-[#dfcd8f]"
                 style={{ top: dotTop }}
               />
             </div>
 
             {/* Info content */}
-            <div className="max-w-md" style={{ fontFamily: '"Google Sans", sans-serif' }}>
+            <div className="max-w-md">
               <p
                 className="text-foreground/70 mb-16"
                 style={{
-                  fontSize: "clamp(1rem, 2vw, 1.25rem)",
-                  lineHeight: 1.6,
-                  fontWeight: 500,
+                  font: "500 clamp(1rem, 2vw, 1.25rem)/1.6 var(--font-inter), sans-serif",
                 }}
               >
                 Whether you&rsquo;re exploring healthcare investment opportunities,
                 seeking growth capital, or looking to transform care delivery in the
                 MENAP region, we&rsquo;re here to help. Let&rsquo;s discuss how Andalus
-                can support your vision.
+                Holding can support your vision.
               </p>
 
               <div className="mb-10">
@@ -107,63 +133,59 @@ export default function ContactPage() {
           </div>
 
           {/* Right — Contact Form */}
-          <div className="flex-[1.2] max-w-2xl" style={{ fontFamily: '"Google Sans", sans-serif' }}>
+          <div className="flex-[1.2] max-w-2xl">
             <h2
               className="text-foreground tracking-[-0.02em] mb-10"
               style={{
-                fontSize: "clamp(1.75rem, 3vw, 2.25rem)",
-                fontWeight: 600,
-                lineHeight: 1.15,
+                font: "600 clamp(1.75rem, 3vw, 2.25rem)/1.15 var(--font-manrope), sans-serif",
               }}
             >
               What are you waiting for? Let&rsquo;s talk&hellip;
             </h2>
             <form className="space-y-6">
+              {/* First Name + Last Name */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <input
                   type="text"
                   placeholder="First Name*"
                   required
                   className="w-full bg-[#f4f4f4] border-none rounded-xl px-6 py-5 text-foreground placeholder:text-foreground/30 text-[15px] outline-none focus:ring-2 focus:ring-black/10 transition-shadow"
-                  style={{ fontFamily: '"Google Sans", sans-serif' }}
                 />
                 <input
                   type="text"
                   placeholder="Last Name*"
                   required
                   className="w-full bg-[#f4f4f4] border-none rounded-xl px-6 py-5 text-foreground placeholder:text-foreground/30 text-[15px] outline-none focus:ring-2 focus:ring-black/10 transition-shadow"
-                  style={{ fontFamily: '"Google Sans", sans-serif' }}
                 />
               </div>
 
+              {/* Email + Subject */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <input
                   type="email"
                   placeholder="Email*"
                   required
                   className="w-full bg-[#f4f4f4] border-none rounded-xl px-6 py-5 text-foreground placeholder:text-foreground/30 text-[15px] outline-none focus:ring-2 focus:ring-black/10 transition-shadow"
-                  style={{ fontFamily: '"Google Sans", sans-serif' }}
                 />
                 <input
                   type="text"
                   placeholder="Subject*"
                   required
                   className="w-full bg-[#f4f4f4] border-none rounded-xl px-6 py-5 text-foreground placeholder:text-foreground/30 text-[15px] outline-none focus:ring-2 focus:ring-black/10 transition-shadow"
-                  style={{ fontFamily: '"Google Sans", sans-serif' }}
                 />
               </div>
 
+              {/* Message */}
               <textarea
                 placeholder="Write your message..."
                 rows={7}
                 className="w-full bg-[#f4f4f4] border-none rounded-xl px-6 py-5 text-foreground placeholder:text-foreground/30 text-[15px] outline-none focus:ring-2 focus:ring-black/10 transition-shadow resize-none"
-                style={{ fontFamily: '"Google Sans", sans-serif' }}
               />
 
+              {/* Submit */}
               <button
                 type="submit"
                 className="w-full bg-foreground text-white text-[15px] font-semibold tracking-wide py-5 rounded-xl hover:bg-foreground/85 transition-colors cursor-pointer"
-                style={{ fontFamily: '"Google Sans", sans-serif' }}
               >
                 Submit
               </button>
@@ -186,9 +208,6 @@ export default function ContactPage() {
           title="Al Sila Tower, ADGM Square, Al Maryah Island, Abu Dhabi"
         />
       </div>
-
-      {/* Footer */}
-      <Footer />
     </div>
   );
 }

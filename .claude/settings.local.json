@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(ls f:/andalus/public/andalus-logo*)"
+      "Bash(ls f:/andalus/public/andalus-logo*)",
+      "Bash(npm install lenis)"
     ]
   }
 }
