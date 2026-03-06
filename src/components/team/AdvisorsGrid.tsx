@@ -33,11 +33,7 @@ export const AdvisorsGrid = () => {
                 Advisors
             </h2>
             <div
-                style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(4, 1fr)',
-                    gap: '1.5rem',
-                }}
+                className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
             >
                 {advisors.map((member) => (
                     <div

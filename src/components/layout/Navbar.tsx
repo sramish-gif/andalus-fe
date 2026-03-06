@@ -80,7 +80,7 @@ export const Navbar = () => {
                 {/* Mobile hamburger */}
                 <button
                     onClick={() => setMobileOpen(!mobileOpen)}
-                    className="md:hidden flex items-center justify-center w-9 h-9 text-white"
+                    className="md:hidden flex items-center justify-center w-9 h-8 text-white"
                     aria-label="Toggle menu"
                 >
                     {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

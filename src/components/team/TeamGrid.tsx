@@ -47,11 +47,7 @@ export const TeamGrid = () => {
     return (
         <div style={{ maxWidth: '1500px', margin: '0 auto', padding: '0 2rem 6rem' }}>
             <div
-                style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(4, 1fr)',
-                    gap: '1.5rem',
-                }}
+                className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
             >
                 {team.map((member) => (
                     <div
@@ -107,9 +103,9 @@ export const TeamGrid = () => {
                             }}
                         >
                             <p
+                                className="text-base md:text-2xl"
                                 style={{
                                     fontFamily: '"Google Sans", sans-serif',
-                                    fontSize: '24px',
                                     fontWeight: 600,
                                     color: '#ffffff',
                                     marginBottom: '2px',
@@ -118,9 +114,9 @@ export const TeamGrid = () => {
                                 {member.name}
                             </p>
                             <p
+                                className="text-[11px] md:text-[13px]"
                                 style={{
                                     fontFamily: '"Google Sans", sans-serif',
-                                    fontSize: '13px',
                                     color: 'rgba(255,255,255,0.6)',
                                 }}
                             >
