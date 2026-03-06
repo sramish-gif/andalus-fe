@@ -4,11 +4,12 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Menu, X } from 'lucide-react';
 
 export const Navbar = () => {
     const pathname = usePathname();
     const [scrolled, setScrolled] = useState(false);
+    const [mobileOpen, setMobileOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -75,7 +76,46 @@ export const Navbar = () => {
                         <ArrowUpRight className="w-3.5 h-3.5" />
                     </span>
                 </Link>
+
+                {/* Mobile hamburger */}
+                <button
+                    onClick={() => setMobileOpen(!mobileOpen)}
+                    className="md:hidden flex items-center justify-center w-9 h-9 text-white"
+                    aria-label="Toggle menu"
+                >
+                    {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                </button>
             </div>
+
+            {/* Mobile menu */}
+            {mobileOpen && (
+                <div
+                    className="md:hidden mt-2 rounded-2xl bg-black/90 backdrop-blur-md px-6 py-6 flex flex-col gap-3"
+                >
+                    {navLinks.map((link) => (
+                        <Link
+                            key={link.href}
+                            href={link.href}
+                            onClick={() => setMobileOpen(false)}
+                            className={`px-4 py-3 rounded-xl text-sm font-medium tracking-[0.1em] uppercase transition-all ${
+                                pathname === link.href
+                                    ? 'bg-white/15 text-white'
+                                    : 'text-white/70 hover:text-white hover:bg-white/10'
+                            }`}
+                        >
+                            {link.name}
+                        </Link>
+                    ))}
+                    <Link
+                        href="/contact"
+                        onClick={() => setMobileOpen(false)}
+                        className="flex items-center justify-center gap-2 mt-2 px-4 py-3 rounded-xl text-sm font-bold text-black uppercase tracking-[0.1em] bg-[#B1A26B] hover:bg-[#a0925f] transition-colors"
+                    >
+                        Contact Us
+                        <ArrowUpRight className="w-4 h-4" />
+                    </Link>
+                </div>
+            )}
           </div>
         </nav>
     );

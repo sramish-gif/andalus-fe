@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { Navbar } from "@/components/layout/Navbar";
 import { GridBackground } from "@/components/ui/GridBackground";
+import { Preloader } from "@/components/ui/Preloader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,6 +43,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${bricolage.variable} font-sans antialiased bg-background text-foreground`}
       >
+        <Preloader />
         <GridBackground />
         <Navbar />
         {children}
